@@ -103,14 +103,15 @@ app.post('/api/projects', (req, res) => {
 // UPDATE project with stages
 app.put('/api/projects/:id', (req, res) => {
   const id = parseInt(req.params.id);
-  const { name, description, start_date, end_date, planned_weeks, stages } = req.body;
+  const { name, description, start_date, end_date, planned_weeks, stages, notes } = req.body;
   const project = data.projects.find(p => p.id === id);
   if (project) {
-    project.name = name;
-    project.description = description;
-    project.planned_weeks = planned_weeks || project.planned_weeks || 10;
-    project.start_date = start_date;
-    project.end_date = end_date;
+    if (name !== undefined) project.name = name;
+    if (description !== undefined) project.description = description;
+    if (planned_weeks !== undefined) project.planned_weeks = planned_weeks;
+    if (start_date !== undefined) project.start_date = start_date;
+    if (end_date !== undefined) project.end_date = end_date;
+    if (notes !== undefined) project.notes = notes;
 
     // If stages provided, update them
     if (stages) {

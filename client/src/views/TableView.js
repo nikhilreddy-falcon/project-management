@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 const API = 'http://localhost:5001/api';
@@ -7,10 +7,29 @@ function TableView({ project, colors, updateStageProgress, onRefresh, isAdmin })
   const [expandedStages, setExpandedStages] = useState({});
   const [editingResources, setEditingResources] = useState(null);
   const [resourceValues, setResourceValues] = useState({ devops: 0, engineers: 0 });
+  const [notes, setNotes] = useState('');
+  const [savingNotes, setSavingNotes] = useState(false);
+
+  useEffect(() => {
+    if (project) {
+      setNotes(project.notes || '');
+    }
+  }, [project?.id, project?.notes]);
 
   if (!project) {
     return <div className="card empty-state">Select a project to view table</div>;
   }
+
+  const saveNotes = async () => {
+    setSavingNotes(true);
+    try {
+      await axios.put(`${API}/projects/${project.id}`, { notes });
+      if (onRefresh) onRefresh();
+    } catch (err) {
+      console.error('Error saving notes:', err);
+    }
+    setSavingNotes(false);
+  };
 
   const stages = project.stages || [];
   const tasks = project.tasks || [];
@@ -343,6 +362,48 @@ function TableView({ project, colors, updateStageProgress, onRefresh, isAdmin })
           <div><strong style={{ color: '#8b5cf6' }}>DO:</strong> DevOps resources</div>
           <div><strong style={{ color: '#3b82f6' }}>Eng:</strong> Engineer resources</div>
         </div>
+      </div>
+
+      {/* Notes Section */}
+      <div style={{ marginTop: '24px', padding: '20px', background: 'white', borderRadius: '8px', border: '1px solid #e5e7eb' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
+          <h4 style={{ margin: 0 }}>Project Notes</h4>
+          {isAdmin && (
+            <button
+              onClick={saveNotes}
+              disabled={savingNotes}
+              style={{
+                padding: '6px 12px',
+                background: savingNotes ? '#9ca3af' : '#3b82f6',
+                color: 'white',
+                border: 'none',
+                borderRadius: '6px',
+                fontSize: '13px',
+                cursor: savingNotes ? 'not-allowed' : 'pointer'
+              }}
+            >
+              {savingNotes ? 'Saving...' : 'Save Notes'}
+            </button>
+          )}
+        </div>
+        <textarea
+          value={notes}
+          onChange={(e) => setNotes(e.target.value)}
+          placeholder={isAdmin ? "Add notes about this project..." : "No notes added yet"}
+          disabled={!isAdmin}
+          style={{
+            width: '100%',
+            minHeight: '120px',
+            padding: '12px',
+            border: '1px solid #d1d5db',
+            borderRadius: '6px',
+            fontSize: '14px',
+            resize: 'vertical',
+            fontFamily: 'inherit',
+            background: isAdmin ? 'white' : '#f9fafb',
+            cursor: isAdmin ? 'text' : 'default'
+          }}
+        />
       </div>
     </div>
   );
