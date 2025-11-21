@@ -10,7 +10,7 @@ import ProjectForm from './components/ProjectForm';
 import Login from './components/Login';
 import UserManagement from './components/UserManagement';
 
-const API = 'http://localhost:5001/api';
+const API = 'http://91.203.132.74:3051/api';
 
 const COLORS = ['#667eea', '#764ba2', '#f093fb', '#f5576c', '#4facfe', '#00f2fe', '#43e97b', '#38f9d7'];
 

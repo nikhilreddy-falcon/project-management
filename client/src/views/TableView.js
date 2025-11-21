@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const API = 'http://localhost:5001/api';
+const API = 'http://91.203.132.74:3051/api';
 
 function TableView({ project, colors, updateStageProgress, onRefresh, isAdmin }) {
   const [expandedStages, setExpandedStages] = useState({});
