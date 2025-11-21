@@ -1,0 +1,77 @@
+{
+  "projects": [
+    {
+      "id": 3,
+      "name": "TEST_P",
+      "description": "",
+      "planned_weeks": 10,
+      "start_date": "2025-11-24",
+      "end_date": "2026-02-02",
+      "created_at": "2025-11-21T08:36:00.186Z"
+    }
+  ],
+  "stages": [
+    {
+      "id": 6,
+      "project_id": 3,
+      "name": "S1",
+      "description": "",
+      "percentage": 40,
+      "progress": 49,
+      "color": "#667eea",
+      "order_index": 0,
+      "devops": 1,
+      "engineers": 1
+    },
+    {
+      "id": 7,
+      "project_id": 3,
+      "name": "S2",
+      "description": "",
+      "percentage": 40,
+      "progress": 0,
+      "color": "#764ba2",
+      "order_index": 1,
+      "devops": 1,
+      "engineers": 3
+    },
+    {
+      "id": 8,
+      "project_id": 3,
+      "name": "S3",
+      "description": "",
+      "percentage": 20,
+      "progress": 0,
+      "color": "#f093fb",
+      "order_index": 2
+    }
+  ],
+  "tasks": [],
+  "settings": {
+    "totalDevops": 10,
+    "totalEngineers": 15
+  },
+  "users": [
+    {
+      "id": 1,
+      "username": "admin",
+      "password": "admin123",
+      "role": "admin",
+      "name": "Administrator"
+    },
+    {
+      "id": 2,
+      "username": "viewer",
+      "password": "viewer123",
+      "role": "viewer",
+      "name": "View User"
+    },
+    {
+      "id": 3,
+      "username": "nikhil",
+      "password": "Hyderabad@123",
+      "role": "viewer",
+      "name": "nikhil"
+    }
+  ]
+}
