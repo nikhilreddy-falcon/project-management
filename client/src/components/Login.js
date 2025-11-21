@@ -31,15 +31,40 @@ function Login({ onLogin }) {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
+      position: 'relative',
+      overflow: 'hidden'
     }}>
+      {/* Background image with blur */}
+      <div style={{
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        backgroundImage: 'url(/login-bg.webp)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        filter: 'blur(3px)',
+        transform: 'scale(1.05)'
+      }} />
+      {/* Overlay for better contrast */}
+      <div style={{
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        background: 'rgba(0, 0, 0, 0.1)'
+      }} />
       <div style={{
         background: 'white',
         padding: '40px',
         borderRadius: '16px',
         boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
         width: '100%',
-        maxWidth: '400px'
+        maxWidth: '400px',
+        position: 'relative',
+        zIndex: 10
       }}>
         <div style={{ textAlign: 'center', marginBottom: '32px' }}>
           <img
@@ -131,13 +156,6 @@ function Login({ onLogin }) {
           </button>
         </form>
 
-        <div style={{ marginTop: '24px', padding: '16px', background: '#f9fafb', borderRadius: '8px' }}>
-          <p style={{ fontSize: '12px', color: '#6b7280', marginBottom: '8px' }}>Demo accounts:</p>
-          <div style={{ fontSize: '12px', color: '#374151' }}>
-            <div><strong>Admin:</strong> admin / admin123</div>
-            <div><strong>Viewer:</strong> viewer / viewer123</div>
-          </div>
-        </div>
       </div>
     </div>
   );
